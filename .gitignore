@@ -1,0 +1,12 @@
+# python
+*.pyc
+__pycache__
+
+# databases
+db.sqlite3
+migrations
+
+# environments
+/env
+*.env
+.vscode
