@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="static/images/my-logo.png">
+</p>
+
 #  Mood Tracker
 
 A mood tracker is a tool that is used to keep a record of a person's mood at regular intervals.
