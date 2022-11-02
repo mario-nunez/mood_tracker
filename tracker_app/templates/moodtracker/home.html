@@ -1,0 +1,44 @@
+{% extends 'moodtracker/main.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5 class="main-titles">Last Moods</h5>
+		<hr class="main-hr">
+		<div class="card card-body dashboard-card">
+			<table class="table table-sm">
+				<tr>
+					<th></th>
+					<th>Date</th>
+					<th>Emotion</th>
+					<th>Rate</th>
+				</tr>
+                
+                <tr>
+				    {% for mood in moods %}
+                	<td>View</td>
+                	<td>{{ mood.day_date }}</td>
+                	<td>{{ mood.emotion}}</td>
+                	<td>{{ mood.reaction_rate }}</td>
+                	{% endfor %}
+				</tr>
+		
+			</table>
+
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5 class="main-titles">AVG USER RATE</h5>
+		<hr class="main-hr">
+		<div class="card card-body dashboard-card">
+			
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

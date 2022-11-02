@@ -1,3 +1,5 @@
+import calendar
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -25,6 +27,7 @@ class MoodTracker(models.Model):
     ]
     emotion = models.CharField(max_length=30)
     day_date = models.DateField()
+    day_week = models.CharField(max_length=10, blank=True)
     day_time = models.TimeField()
     day_part = models.CharField(max_length=10, choices=DAY_PART_CHOICES)
     reason = models.TextField()
@@ -32,6 +35,11 @@ class MoodTracker(models.Model):
     reaction_rate = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        # overwrite sva method to add automatically the day of the week
+        self.day_week = calendar.day_name[self.day_date.weekday()]
+        super(MoodTracker, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.emotion}-{self.day_date}"
