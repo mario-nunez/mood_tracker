@@ -3,6 +3,8 @@ import calendar
 from django.contrib.auth.models import User
 from django.db import models
 
+from .constants import MORNING, AFTERNOON, EVENING, NIGHT
+
 
 # Create your models here.
 
@@ -19,26 +21,28 @@ class Client(models.Model):
         return f"{self.name} {self.surname}"
 
 class MoodTracker(models.Model):
-    DAY_PART_CHOICES = [
-        ('morning', 'Morning'),
-        ('afternoon', 'Afternoon'),
-        ('evening', 'Evening'),
-        ('night', 'Night'),
-    ]
     emotion = models.CharField(max_length=30)
     day_date = models.DateField()
     day_week = models.CharField(max_length=10, blank=True)
     day_time = models.TimeField()
-    day_part = models.CharField(max_length=10, choices=DAY_PART_CHOICES)
+    day_part = models.CharField(max_length=10, blank=True)
     reason = models.TextField()
     reaction = models.TextField()
     reaction_rate = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_day_part(self, parts):
+        for part in parts:
+            if self.day_time >= part['start'] and self.day_time <= part['end']:
+                self.day_part = part['value']
+                return
+
     def save(self, *args, **kwargs):
-        # overwrite sva method to add automatically the day of the week
+        # overwrite save method to add automatically some fields
         self.day_week = calendar.day_name[self.day_date.weekday()]
+        parts = [MORNING, AFTERNOON, EVENING, NIGHT]
+        self.get_day_part(parts)
         super(MoodTracker, self).save(*args, **kwargs)
 
     def __str__(self) -> str:

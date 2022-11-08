@@ -8,14 +8,55 @@ from .serializers import MoodTrackerSerializer
 
 # Create your views here.
 
-class MoodList(APIView):
+class HomeList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'moodtracker/home.html'
 
     def get(self, request):
         moods = MoodTracker.objects.all()
         serializer = MoodTrackerSerializer(moods, many=True)
-        return Response({'moods': serializer.data}, status=status.HTTP_200_OK)
+
+        # Get data group by days
+
+        data = {
+            'moods': serializer.data,
+            'avg_rate': 6,
+            'achievements': 16
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
     
+    def post(self, request):
+        pass
+
+class MoodList(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'moodtracker/moods.html'
+
+    def get(self, request):
+        moods = MoodTracker.objects.all()
+        serializer = MoodTrackerSerializer(moods, many=True)
+
+        data = {
+            'moods': serializer.data
+            }
+        return Response(data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        pass
+
+class MoodCharts(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'moodtracker/moods.html'
+
+    def get(self, request):
+        moods = MoodTracker.objects.all()
+        serializer = MoodTrackerSerializer(moods, many=True)
+
+        data = {
+            'moods': serializer.data
+            }
+        return Response(data, status=status.HTTP_200_OK)
+
     def post(self, request):
         pass

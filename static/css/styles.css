@@ -6,8 +6,7 @@
 
 /* Navbar style */
 .navbar-theme{
-    color: whitesmoke;
-    background-color: #563d7c;
+    background-color: #563d7c !important;
 }
 
 .div-nav-margin {
@@ -24,9 +23,10 @@
     border-radius: 10px;
     font-size: 17px;
     text-align: center;
+    color: whitesmoke !important;
 }
 li.nav-item, .span.user-button a:hover {
-    color: whitesmoke;
+    color: whitesmoke !important;
     text-decoration: none !important;
 }
 
@@ -34,11 +34,24 @@ li.nav-item, .span.user-button a:hover {
 
 
 
+/* Statistics cards style */
+.statistics-card{
+    color: 'black';
+}
 
 
+#avg-rates{
+    background-color: #ec7dd0;
+}
 
+#achievements{
+    background-color: #ecc97d;
+}
 
-/* Status cards style */
+#statistics{
+    background-color: #99c1cf;
+}
+
 
 
 /* Chart JS style */

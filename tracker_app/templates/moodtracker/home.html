@@ -19,14 +19,20 @@
 					<th>Rate</th>
 				</tr>
                 
-                <tr>
-				    {% for mood in moods %}
-                	<td>View</td>
-                	<td>{{ mood.day_date }}</td>
-                	<td>{{ mood.emotion}}</td>
-                	<td>{{ mood.reaction_rate }}</td>
-                	{% endfor %}
-				</tr>
+                
+				{% for mood in moods %}
+					<tr>
+						<td>
+							<a class="btn btn-sm btn-info" href="">
+								<i class="fa fa-eye" aria-hidden="true"></i> View
+							</a>
+						</td>
+						<td>{{ mood.day_date }}</td>
+						<td>{{ mood.emotion}}</td>
+						<td>{{ mood.reaction_rate }}</td>
+					</tr>
+                {% endfor %}
+				
 		
 			</table>
 
