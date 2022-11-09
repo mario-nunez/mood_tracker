@@ -10,7 +10,7 @@ from .serializers import MoodTrackerSerializer
 
 class HomeList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'moodtracker/home.html'
+    template_name = 'mood_tracker/home.html'
 
     def get(self, request):
         moods = MoodTracker.objects.all()
@@ -31,7 +31,7 @@ class HomeList(APIView):
 
 class MoodList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'moodtracker/moods.html'
+    template_name = 'mood_tracker/moods.html'
 
     def get(self, request):
         moods = MoodTracker.objects.all()
@@ -47,7 +47,7 @@ class MoodList(APIView):
 
 class MoodCharts(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'moodtracker/moods.html'
+    template_name = 'mood_tracker/charts.html'
 
     def get(self, request):
         moods = MoodTracker.objects.all()
@@ -57,6 +57,3 @@ class MoodCharts(APIView):
             'moods': serializer.data
             }
         return Response(data, status=status.HTTP_200_OK)
-
-    def post(self, request):
-        pass

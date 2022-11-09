@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TrackerAppConfig(AppConfig):
+class SelfImprovementConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tracker_app'
+    name = 'apps.self_improvement'
