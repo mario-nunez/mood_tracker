@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
     <title>Mood Tracker</title>
     <link rel="icon" type="image/x-icon" href="{% static 'images/mood-tracker-logo.ico' %}">
     <!-- Boostrap -->
@@ -15,12 +15,12 @@
     <!-- Charts JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/761684499b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <!-- static styles -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
 
     </head>
-<body class="main-background">
+<body class="main-background" style="overflow-x: hidden;">
 
     {% include 'common/navbar.html' %}
 

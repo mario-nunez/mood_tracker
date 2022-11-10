@@ -22,4 +22,4 @@ It provides a record of the moods registered by the user and visualizations base
 In order to be able to see the output of this project, it is required to follow the next steps:
 
 1. Clone the project
-2. Install the requirements.txt
+2. Install requirements.txt file

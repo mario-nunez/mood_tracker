@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-theme">
+<nav class="navbar sticky-top navbar-custom navbar-expand-lg navbar-dark bg-dark">
     <!--
   <a href="">
     <img src="{% static 'images/my-logo.png' %}" alt="Mood Tracker"
@@ -21,25 +21,27 @@
         </li>
         <li class="nav-item active div-nav-margin">
             <a class="nav-link btn-circle" href="{% url 'charts' %}"><i class="fa fa-chart-line"></i> Charts</a>
+            <!--<a class="nav-link btn-circle" href="{% url 'charts' %}">&#128202; Charts</a> -->
         </li>
         <li class="nav-item active div-nav-margin">
           <a class="nav-link btn-circle" href="{% url 'diary' %}"><i class="fa fa-book"></i> Diary</a>
       </li>
         <li class="nav-item active div-nav-margin">
-            <a class="nav-link btn-circle" href="{% url 'lessons' %}"><i class="fa fa-book"></i> Improve</a>
+            <a class="nav-link btn-circle" href="{% url 'lessons' %}"><i class="fa fa-graduation-cap"></i> Improve</a>
         </li>
     </ul>
   </div>
 
-  <span class="nav-item dropdown user-button btn-circle">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      User
+  <span class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle btn-circle" href="#" id="navbarDropdownMenuLink"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Name Surname
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-      <a class="dropdown-item" href="#"><i class="fa fa-star"></i> Badges</a>
+      <a class="dropdown-item" href="#">&#11088; Achievements</a>
       <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
-      <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Logout</a>
+      <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
-</span>
+  </span>
 
 </nav>

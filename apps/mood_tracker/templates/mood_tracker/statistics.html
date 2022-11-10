@@ -1,47 +1,67 @@
+{% load static %}
+
 <br>
 
 <div class="row">
 	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white mb-3" id="avg-rates">
+		
+			<div class="card text-center mb-3" id="avg-rates">
 			  	<div class="card-header">
-			  		<h5 class="card-title">Avg Rate</h5>
+			  		<h5 style="margin-bottom: -4px;">Average Rate</h5>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title">{{avg_rate}}/5</h3>
+			    	<h3>{{avg_rate}}/5 &nbsp;
+						{% if avg_rate >= 4 %}
+							&#128525;
+							<!--
+								<img src="{% static 'images/my-logo.png' %}" width="130" height="40">
+								<i class="far fa-grin-stars" title="Excellent"></i>
+							 -->
+						{% elif avg_rate >= 3 %}
+							&#128516;
+							<!-- <i class="far fa-smile" title="Great"></i>  -->
+						{% elif avg_rate >= 2 %}
+							&#128522;
+							<!-- <i class="far fa-frown" title="Good"></i>  -->
+						{% else %}
+							&#128554;
+							<!-- <i class="far fa-sad-cry" title="Keep going!"></i>  -->
+						{% endif %}
+					</h3>
 			  	</div>
 			</div>
+
+	</div>
+
+
+	<div class="col">
+			<div class="card text-center mb-3" id="achievements">
+				<div class="card-header">
+					<h5 style="margin-bottom: -4px;">Achievements</h5>
+				</div>
+				<div class="card-body">
+				  <h3>{{achievements}}/??</h3>
+				</div>
+
 		</div>
 	</div>
 
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white mb-3" id="achievements">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Achievements</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">{{achievements}}/??</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white mb-3" id="statistics">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Statistics</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">5/10</h3>
-                    <p>Best day</p>
-                    <p>Worst day</p>
-                    <p>Days registered</p>
-                    <p>Avg month</p>
-			  	</div>
+			<div class="card text-center mb-3" id="statistics">
+					<div class="card-header">
+						<h5 style="margin-bottom: -4px;">Statistics</h5>
+					</div>
+
+					<div class="card-body" style="margin-bottom: -32px; margin-top: -15px">
+						<dl>
+							<dt>Days registered: 55</dt>
+							<dt><i class="far fa-grin-stars"></i> <a class="">Best day</a></dt>
+							<dt><i class="far fa-sad-cry"></i> <a class="">Worst day</a></dt>
+						</dl>
+					</div>
 			</div>
-		</div>
 	</div>
+
 
 </div>
