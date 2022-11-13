@@ -9,8 +9,10 @@
 /* Navbar style */
 .navbar-custom {
     background-color: #563d7c !important;
-
 }
+
+/* Add a solid line at the bottom of navbar buttons */
+.navbar-button { border-bottom: 5px solid;}
 
 .div-nav-margin {
     margin-left: 5px;

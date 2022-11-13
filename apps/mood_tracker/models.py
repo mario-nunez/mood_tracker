@@ -34,3 +34,13 @@ class MoodTracker(models.Model):
 
     def __str__(self) -> str:
         return f"{self.emotion}-{self.day_date}"
+
+
+class Achievement(models.Model):
+    title = models.CharField(max_length=30)
+    obtained = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.emotion}-{self.day_date}"

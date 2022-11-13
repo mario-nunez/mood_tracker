@@ -9,45 +9,37 @@
 <div class="row">
 	<div class="col">
 		<div class="col-md">
-		<h5>Last Moods</h5>
-		<div class="card card-body" >
-			
-			<table class="table table-sm">
+			<h5>Last Moods &nbsp;
 				<a class="btn btn-sm btn-info" style="width: fit-content;"
-				   href="">
-					<i class="far fa-edit"></i> Register mood
-				</a>
-				<tr>
-					<th>Date</th>
-					<th>Emotion</th>
-					<th>Rate</th>
-				</tr>
+				href=""> <i class="far fa-edit"></i> Register mood</a>
+			</h5>
+			<div class="card card-body" >
 
 				{% if not moods %}
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+					<h6>No moods registered yet...</h6>
+				{% else %}
+					<table class="table table-sm">
+						<tr>
+							<th>Date</th>
+							<th>Emotion</th>
+							<th>Rate</th>
+						</tr>
+						{% for mood in moods %}
+							<tr>
+								<td>{{ mood.day_date }}</td>
+								<td>{{ mood.emotion}}</td>
+								<td>{{ mood.reaction_rate }}</td>
+							</tr>
+						{% endfor %}
+					</table>
 				{% endif %}
-                
-				{% for mood in moods %}
-					<tr>
-						<td>{{ mood.day_date }}</td>
-						<td>{{ mood.emotion}}</td>
-						<td>{{ mood.reaction_rate }}</td>
-					</tr>
-                {% endfor %}
+					
+			
 				
-		
-			</table>
 
+			</div>
 		</div>
 	</div>
-	</div>
-
-	
-
 </div>
 
 {% endblock %}
