@@ -22,5 +22,7 @@ urlpatterns = [
     path('', include('apps.mood_tracker.urls')),
     path('', include('apps.diary.urls')),
     path('', include('apps.self_improvement.urls')),
+    path('', include('apps.common.urls')),
+    path('', include('django.contrib.auth.urls')),
 
 ]
