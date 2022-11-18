@@ -14,13 +14,13 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #7abecc !important;
+			background: #9a38c1 !important;
 		}
 		.user_card {
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #74cfbf;
+			background: #ce80ed;
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -66,12 +66,6 @@
 			outline: 0px !important;
 		}
 
-		#messages{
-			background-color: grey;
-			color: #fff;
-			padding: 10px;
-			margin-top: 10px;
-		}
 	</style>
 
 </head>
@@ -108,10 +102,19 @@
 				</div>
 				
                 {% for message in messages %}
-                    <p id="messages">{{message}}</p>
-                {% endfor %}
+					<br>
+					<div class="container-fluid p-0">
+						<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="True">&times;</span>
+							</button>
+							{{ message }}
+						</div>
+					</div>
+				{% endfor %}
+
 				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
+					<div class="d-flex justify-content-center links" style="background-color: rgb(253, 206, 206);">
 						Don't have an account? <a href="{% url 'sign-up' %}" class="ml-2">Sign Up</a>
 					</div>
 				</div>

@@ -16,20 +16,23 @@ class SignUp(APIView):
     template_name = 'registration/sign_up.html'
 
     def get(self, request):
-        print(request.user)
-        if request.user.is_authenticated:
-            return redirect('home')
-
         form = CreateUserForm()
         context = { 'form': form }
 
         return Response(context, status=status.HTTP_200_OK)
     
     def post(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-
+        form = CreateUserForm(request.data)
         
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful." )
+            return redirect('login')
+
+        context = { 'form': form }
+
+        return Response(context, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogIn(APIView):
@@ -60,3 +63,24 @@ class LogOut(APIView):
         logout(request)
         return redirect('login')
     
+
+class About(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'common/about.html'
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+class UserSettings(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'common/settings.html'
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+class UserAchievements(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'common/achievements.html'
+
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
