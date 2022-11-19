@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 
 from .models import MoodTracker
 from .serializers import MoodTrackerSerializer
+from ..common.decorators import authentication_required
+
 
 # Create your views here.
 
@@ -12,6 +14,7 @@ class HomeList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/home.html'
 
+    @authentication_required
     def get(self, request):
         moods = MoodTracker.objects.all()
         serializer = MoodTrackerSerializer(moods, many=True)
@@ -25,14 +28,13 @@ class HomeList(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-    
-    def post(self, request):
-        pass
+
 
 class MoodList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/moods.html'
 
+    @authentication_required
     def get(self, request):
         moods = MoodTracker.objects.all()
         serializer = MoodTrackerSerializer(moods, many=True)
@@ -42,6 +44,7 @@ class MoodList(APIView):
             }
         return Response(data, status=status.HTTP_200_OK)
 
+    @authentication_required
     def post(self, request):
         pass
 
@@ -49,6 +52,7 @@ class MoodCharts(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/charts.html'
 
+    @authentication_required
     def get(self, request):
         moods = MoodTracker.objects.all()
         serializer = MoodTrackerSerializer(moods, many=True)
