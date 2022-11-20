@@ -14,7 +14,7 @@
        id="picture" class="rounded-circle shadow-4-strong"
        width="40" height="40" style="opacity: 0.8;"> {{request.user}}
     </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" data-offset="10,20">
       <a class="dropdown-item" href="{% url 'achievements' %}">&#127941; Achievements</a>
       <a class="dropdown-item" href="{% url 'settings' %}">⚙️ Settings</a>
       <a class="dropdown-item" href="{% url 'about' %}">&#128125; About</a>
@@ -39,11 +39,11 @@
           <a class="nav-link btn-circle" href="{% url 'diary' %}"><i class="fa fa-book"></i> Diary</a>
         </li>
         <li class="nav-item active div-nav-margin">
-            <a class="nav-link btn-circle" href="{% url 'lessons' %}"><i class="fa fa-graduation-cap"></i> Improve</a>
+            <a class="nav-link btn-circle" href="{% url 'lessons' %}"><i class="fa fa-graduation-cap"></i> Lessons</a>
         </li>
         {% if request.user.is_staff %}
           <li class="nav-item active div-nav-margin">
-            <a class="nav-link btn-circle" href="{% url 'home' %}"><i class="fa fa-chart-pie"></i> Dashboard</a>
+            <a class="nav-link btn-circle" href="{% url 'dashboard' %}"><i class="fa fa-chart-pie"></i> Dashboard</a>
           </li>
         {% endif %}
     </ul>

@@ -3,8 +3,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import MoodTracker
-from .serializers import MoodTrackerSerializer
+from .models import Mood, UserProfile
+from .serializers import MoodSerializer, MoodsDaySerializer
 from ..common.decorators import authentication_required
 
 
@@ -16,8 +16,9 @@ class HomeList(APIView):
 
     @authentication_required
     def get(self, request):
-        moods = MoodTracker.objects.all()
-        serializer = MoodTrackerSerializer(moods, many=True)
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)
+        serializer = MoodsDaySerializer(user_moods, many=True)
 
         # Get data group by days
 
@@ -36,8 +37,9 @@ class MoodList(APIView):
 
     @authentication_required
     def get(self, request):
-        moods = MoodTracker.objects.all()
-        serializer = MoodTrackerSerializer(moods, many=True)
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)
+        serializer = MoodSerializer(user_moods, many=True)
 
         data = {
             'moods': serializer.data
@@ -48,14 +50,16 @@ class MoodList(APIView):
     def post(self, request):
         pass
 
+
 class MoodCharts(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/charts.html'
 
     @authentication_required
     def get(self, request):
-        moods = MoodTracker.objects.all()
-        serializer = MoodTrackerSerializer(moods, many=True)
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)
+        serializer = MoodSerializer(user_moods, many=True)
 
         data = {
             'moods': serializer.data

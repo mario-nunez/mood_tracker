@@ -14,6 +14,7 @@ def authentication_not_required(view_func, redirect_url="home"):
         return redirect(redirect_url)
     return wrapper
 
+
 def authentication_required(view_func, redirect_url="login"):
     """
     This decorator checks if the user is logged in, if so  it retrieves the
@@ -22,6 +23,19 @@ def authentication_required(view_func, redirect_url="login"):
     @functools.wraps(view_func)
     def wrapper(request, *args, **kwargs):
         if request.request.user.is_authenticated:
+            return view_func(request, *args, **kwargs)
+        return redirect(redirect_url)
+    return wrapper
+
+
+def admin_only(view_func, redirect_url="home"):
+    """
+    This decorator checks if the user is admin, if not it redirects him to his
+    home page.
+    """
+    @functools.wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if request.request.user.is_superuser:
             return view_func(request, *args, **kwargs)
         return redirect(redirect_url)
     return wrapper

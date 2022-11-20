@@ -8,6 +8,10 @@ urlpatterns = [
     path('login/', views.LogIn.as_view(), name='login'),
     path('logout/', views.LogOut.as_view(), name='logout'),
     path('about/', views.About.as_view(), name='about'),
-    path('achievements/', views.UserAchievements.as_view(), name='achievements'),
+    path('achievements/',
+         views.UserAchievements.as_view(),
+         name='achievements'),
     path('settings/', views.UserSettings.as_view(), name='settings'),
+    path('dashboard/', views.AdminDashboard.as_view(), name='dashboard'),
+
 ]

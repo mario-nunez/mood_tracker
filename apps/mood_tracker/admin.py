@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import MoodTracker
+from .models import Mood
 
 # Register your models here.
 
-admin.site.register(MoodTracker)
+admin.site.register(Mood)
