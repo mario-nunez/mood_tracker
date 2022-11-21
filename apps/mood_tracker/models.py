@@ -1,8 +1,9 @@
 import calendar
 
+from django.core.validators import MaxValueValidator
 from django.db import models
 
-from .constants import MORNING, AFTERNOON, EVENING, NIGHT
+from .constants import MAX_REACTION_RATE, MORNING, AFTERNOON, EVENING, NIGHT
 from ..common.models import UserProfile
 
 
@@ -18,7 +19,9 @@ class Mood(models.Model):
     day_part = models.CharField(max_length=10, blank=True)
     reason = models.TextField()
     reaction = models.TextField()
-    reaction_rate = models.IntegerField()
+    reaction_rate = models.PositiveIntegerField(
+                           validators=[MaxValueValidator(MAX_REACTION_RATE)]
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -27,8 +30,8 @@ class Mood(models.Model):
             if self.day_time >= part['start'] and self.day_time <= part['end']:
                 self.day_part = part['value']
                 return
-        if not self.day_part:
-            self.day_part = part['value']
+        # if not in any range it's night
+        self.day_part = part['value']
 
     def save(self, *args, **kwargs):
         # overwrite save method to add automatically some fields

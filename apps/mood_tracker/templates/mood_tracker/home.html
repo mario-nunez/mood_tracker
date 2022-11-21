@@ -21,23 +21,22 @@
 					<table class="table table-sm">
 						<tr>
 							<th>Date</th>
-							<th>Day</th>
+							<th>Day of the week</th>
+							<th style="text-align: center;">Moods registered</th>
 							<th style="text-align: center;">Avg Rate</th>
 						</tr>
 						{% for mood in moods %}
 							<tr>
-								<td>{{ mood.day_date }}</td>
-								<td>{{ mood.day_week}}</td>
-								<td style="text-align: center;">{{ mood.reaction_rate }}</td>
+								<td>{{mood.day_date}}</td>
+								<td>{{mood.day_week}}</td>
+								<td style="text-align: center;">{{mood.total_moods}}</td>
+								<td style="text-align: center;">{{mood.avg_rate}}</td>
 							</tr>
 						{% endfor %}
 					</table>
 					<a class="btn btn-sm btn-info" style="width: fit-content;"
 					   href=""> <i class="fa fa-eye"></i> View all moods...</a>
 				{% endif %}
-					
-			
-				
 
 			</div>
 		</div>

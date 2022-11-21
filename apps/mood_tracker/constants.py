@@ -1,5 +1,7 @@
 import datetime
 
+MAX_REACTION_RATE = 5
+
 
 MORNING = {
     'start': datetime.time(6, 0, 1),
