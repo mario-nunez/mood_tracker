@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'apps.common.templatetags.tag_methods',
     'apps.common',
     'apps.mood_tracker',
     'apps.diary',

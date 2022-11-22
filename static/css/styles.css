@@ -46,6 +46,8 @@ span.nav-item:hover {
 #statistics{ background-color: #b8dbe2; margin-right: 11px;}
 
 
+/* Home table style */
+#table-rows:hover {background-color: rgb(240, 213, 204);}
 
 /* Chart JS style */
 

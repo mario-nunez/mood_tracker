@@ -102,6 +102,11 @@ class UserAchievements(APIView):
     def get(self, request):
         return Response(status=status.HTTP_200_OK)
 
+    @admin_only
+    @authentication_required
+    def post(self, request):
+        return Response(status=status.HTTP_200_OK)
+
 
 class AdminDashboard(APIView):
     renderer_classes = [TemplateHTMLRenderer]

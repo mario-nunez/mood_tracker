@@ -4,6 +4,8 @@
 
 {% include 'mood_tracker/statistics.html' %}
 
+{% load tag_methods %}
+
 <br>
 
 <div class="row">
@@ -15,22 +17,40 @@
 			</h5>
 			<div class="card card-body" >
 
-				{% if not moods %}
+				{% if not day_moods %}
 					<h6>No moods registered yet...</h6>
 				{% else %}
 					<table class="table table-sm">
 						<tr>
 							<th>Date</th>
-							<th>Day of the week</th>
-							<th style="text-align: center;">Moods registered</th>
-							<th style="text-align: center;">Avg Rate</th>
+							<th>Day</th>
+							<th style="text-align: center;">Moods</th>
+							<th style="text-align: center;">Rate</th>
 						</tr>
-						{% for mood in moods %}
-							<tr>
+						{% for mood in day_moods %}
+							<tr id="table-rows">
 								<td>{{mood.day_date}}</td>
 								<td>{{mood.day_week}}</td>
 								<td style="text-align: center;">{{mood.total_moods}}</td>
-								<td style="text-align: center;">{{mood.avg_rate}}</td>
+								<td style="text-align: center;">
+									{% if mood.day_avg_rate|get_decimals %}
+										{{mood.day_avg_rate|to_float}}
+									{% else %}
+										{{mood.day_avg_rate|floatformat:"0"}}
+									{% endif %}
+									
+									{% if mood.day_avg_rate|to_float >= 4 %}
+										🥳
+									{% elif mood.day_avg_rate|to_float >= 3 %}
+										😁
+									{% elif mood.day_avg_rate|to_float >= 2 %}
+										😄
+									{% elif mood.day_avg_rate|to_float >= 1 %}
+										🙁
+									{% elif mood.day_avg_rate|to_float >= 0 %}
+										😪
+									{% endif %}
+								</td>
 							</tr>
 						{% endfor %}
 					</table>
