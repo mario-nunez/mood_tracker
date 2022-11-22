@@ -9,8 +9,10 @@
 /* Navbar style */
 .navbar-custom {
     background-color: #563d7c !important;
-
 }
+
+/* Add a solid line at the bottom of navbar buttons */
+.navbar-button { border-bottom: 5px solid;}
 
 .div-nav-margin {
     margin-left: 5px;
@@ -43,6 +45,9 @@ span.nav-item:hover {
 #achievements{ background-color: #f6e866; margin-right: 11px;}
 #statistics{ background-color: #b8dbe2; margin-right: 11px;}
 
+
+/* Home table style */
+#table-rows:hover {background-color: rgb(240, 213, 204);}
 
 /* Chart JS style */
 

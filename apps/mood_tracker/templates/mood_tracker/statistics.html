@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag_methods %}
 
 <br>
 
@@ -10,24 +11,17 @@
 			  		<h5 style="margin-bottom: -4px;">Average Rate</h5>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3>{{avg_rate}}/5 &nbsp;
-						{% if avg_rate >= 4 %}
-							&#128525;
-							<!--
-								<img src="{% static 'images/my-logo.png' %}" width="130" height="40">
-								<i class="far fa-grin-stars" title="Excellent"></i>
-							 -->
-						{% elif avg_rate >= 3 %}
-							&#128516;
-							<!-- <i class="far fa-smile" title="Great"></i>  -->
-						{% elif avg_rate >= 2 %}
-							&#128522;
-							<!-- <i class="far fa-frown" title="Good"></i>  -->
-						{% else %}
-							&#128554;
-							<!-- <i class="far fa-sad-cry" title="Keep going!"></i>  -->
-						{% endif %}
-					</h3>
+					{% if not user_avg_rate %}
+						<h6><a href="">Register mood to see rates</a></h6>
+					{% else %}
+						<h3>
+							{% if user_avg_rate|get_decimals %}
+								{{user_avg_rate|to_float}}/{{max_rate}}
+							{% else %}
+								{{user_avg_rate|floatformat:"0"}}/{{max_rate}}
+							{% endif %}
+						</h3>
+					{% endif %}
 			  	</div>
 			</div>
 
@@ -40,14 +34,14 @@
 					<h5 style="margin-bottom: -4px;">Achievements</h5>
 				</div>
 				<div class="card-body">
-				  <h3>{{achievements}}/??</h3>
+				  <h3>{{user_achievements}}/{{total_achievements}}</h3>
 				</div>
 
 		</div>
 	</div>
 
-
-	<div class="col">
+	<!-- Hide in mobile and small views -->
+	<div class="col  d-none d-sm-block d-sm-none d-md-block">
 			<div class="card text-center mb-3" id="statistics">
 					<div class="card-header">
 						<h5 style="margin-bottom: -4px;">Statistics</h5>
@@ -55,9 +49,9 @@
 
 					<div class="card-body" style="margin-bottom: -32px; margin-top: -15px">
 						<dl>
-							<dt>Days registered: 55</dt>
-							<dt><i class="far fa-grin-stars"></i> <a class="">Best day</a></dt>
-							<dt><i class="far fa-sad-cry"></i> <a class="">Worst day</a></dt>
+							<dt>Days registered: {{days_registered}}</dt>
+							<dt>😎 <a class="">Best day</a></dt>
+							<dt>😭 <a class="">Worst day</a></dt>
 						</dl>
 					</div>
 			</div>

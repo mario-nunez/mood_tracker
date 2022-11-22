@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from .models import Mood
+from .models import UserProfile
 
 
 class CreateUserForm(UserCreationForm):
@@ -11,8 +11,8 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class MoodForm(ModelForm):
+class UserProfileForm(ModelForm):
     class Meta:
-        model = Mood
-        fields = ['emotion', 'day_date', 'day_time', 'reason',
-                  'reaction', 'reaction_rate']
+        model = UserProfile
+        fields = '__all__'
+        exclude = ['user']

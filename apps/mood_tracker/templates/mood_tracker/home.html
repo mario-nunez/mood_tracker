@@ -4,50 +4,63 @@
 
 {% include 'mood_tracker/statistics.html' %}
 
+{% load tag_methods %}
+
 <br>
 
 <div class="row">
 	<div class="col">
 		<div class="col-md">
-		<h5>Last Moods</h5>
-		<div class="card card-body" >
-			
-			<table class="table table-sm">
+			<h5>Last Days Registers &nbsp;
 				<a class="btn btn-sm btn-info" style="width: fit-content;"
-				   href="">
-					<i class="far fa-edit"></i> Register mood
-				</a>
-				<tr>
-					<th>Date</th>
-					<th>Emotion</th>
-					<th>Rate</th>
-				</tr>
+				href=""> <i class="far fa-edit"></i> Register mood</a>
+			</h5>
+			<div class="card card-body" >
 
-				{% if not moods %}
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				{% if not day_moods %}
+					<h6>No moods registered yet...</h6>
+				{% else %}
+					<table class="table table-sm">
+						<tr>
+							<th>Date</th>
+							<th>Day</th>
+							<th style="text-align: center;">Moods</th>
+							<th style="text-align: center;">Rate</th>
+						</tr>
+						{% for mood in day_moods %}
+							<tr id="table-rows">
+								<td>{{mood.day_date}}</td>
+								<td>{{mood.day_week}}</td>
+								<td style="text-align: center;">{{mood.total_moods}}</td>
+								<td style="text-align: center;">
+									{% if mood.day_avg_rate|get_decimals %}
+										{{mood.day_avg_rate|to_float}}
+									{% else %}
+										{{mood.day_avg_rate|floatformat:"0"}}
+									{% endif %}
+									
+									{% if mood.day_avg_rate|to_float >= 4 %}
+										🥳
+									{% elif mood.day_avg_rate|to_float >= 3 %}
+										😁
+									{% elif mood.day_avg_rate|to_float >= 2 %}
+										😄
+									{% elif mood.day_avg_rate|to_float >= 1 %}
+										🙁
+									{% elif mood.day_avg_rate|to_float >= 0 %}
+										😪
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+					<a class="btn btn-sm btn-info" style="width: fit-content;"
+					   href=""> <i class="fa fa-eye"></i> View all moods...</a>
 				{% endif %}
-                
-				{% for mood in moods %}
-					<tr>
-						<td>{{ mood.day_date }}</td>
-						<td>{{ mood.emotion}}</td>
-						<td>{{ mood.reaction_rate }}</td>
-					</tr>
-                {% endfor %}
-				
-		
-			</table>
 
+			</div>
 		</div>
 	</div>
-	</div>
-
-	
-
 </div>
 
 {% endblock %}

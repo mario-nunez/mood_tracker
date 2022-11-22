@@ -14,6 +14,17 @@ import os
 from pathlib import Path
 
 import environ
+from django.contrib.messages import constants as messages
+
+
+# beautify django messages with boostrap alerts
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 
 # Environment to hidde database information
@@ -45,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'apps.common.templatetags.tag_methods',
     'apps.common',
     'apps.mood_tracker',
     'apps.diary',
@@ -93,6 +105,14 @@ DATABASES = {
         'PASSWORD': env("DB_PASSWORD"),
         'HOST': env("DB_HOST"),
         'PORT': env("DB_PORT"),
+    },
+    'heroku': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("HEROKU_DB_NAME"),
+        'USER': env("HEROKU_DB_USER"),
+        'PASSWORD': env("HEROKU_DB_PASSWORD"),
+        'HOST': env("HEROKU_DB_HOST"),
+        'PORT': env("HEROKU_DB_PORT"),
     },
     'sql-django': {
         'ENGINE': 'django.db.backends.sqlite3',
