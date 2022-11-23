@@ -33,22 +33,21 @@
 								<td>{{mood.day_week}}</td>
 								<td style="text-align: center;">{{mood.total_moods}}</td>
 								<td style="text-align: center;">
-									{% if mood.day_avg_rate|get_decimals %}
-										{{mood.day_avg_rate|to_float}}
-									{% else %}
-										{{mood.day_avg_rate|floatformat:"0"}}
-									{% endif %}
-									
-									{% if mood.day_avg_rate|to_float >= 4 %}
+									{{mood.day_avg_rate}}
+									{% if mood.day_avg_rate|to_float == 5 %}
+                                        🤩
+									{% elif mood.day_avg_rate|to_float >= 4 %}
 										🥳
 									{% elif mood.day_avg_rate|to_float >= 3 %}
 										😁
+									{% elif mood.day_avg_rate|to_float >= 2.5 %}
+										😊
 									{% elif mood.day_avg_rate|to_float >= 2 %}
-										😄
+										🙂
 									{% elif mood.day_avg_rate|to_float >= 1 %}
-										🙁
-									{% elif mood.day_avg_rate|to_float >= 0 %}
 										😪
+									{% elif mood.day_avg_rate|to_float == 0 %}
+										☠️
 									{% endif %}
 								</td>
 							</tr>
