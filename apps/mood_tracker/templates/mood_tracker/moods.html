@@ -76,9 +76,10 @@
 								</td>
 							</tr>
 						{% endfor %}
+						
 					</table>
-					<a class="btn btn-sm btn-info" style="width: fit-content;"
-					   href=""> <i class="fa fa-eye"></i> View all moods...</a>
+					<a class="btn btn-warning" href={{previous_link}} role="button" style="width: fit-content;">PREVIOUS</a>
+					<a class="btn btn-warning" href={{next_link}} role="button" style="width: fit-content;">NEXT</a>
 				{% endif %}
 
 			</div>
