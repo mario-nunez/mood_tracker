@@ -2,14 +2,10 @@
 .main-background {background-color: #e4ecf1;}
 
 /* Display information style */
-.margins-data {
-    margin: 1px;
-}
+.margins-data {margin: 1px;}
 
 /* Navbar style */
-.navbar-custom {
-    background-color: #563d7c !important;
-}
+.navbar-custom {background-color: #563d7c !important;}
 
 /* Add a solid line at the bottom of navbar buttons */
 .navbar-button { border-bottom: 5px solid;}
@@ -46,8 +42,18 @@ span.nav-item:hover {
 #statistics{ background-color: #b8dbe2; margin-right: 11px;}
 
 
-/* Home table style */
+/* Tables style */
 #table-rows:hover {background-color: rgb(240, 213, 204);}
+
+
+/* Pagination styles*/
+.no-hover{pointer-events: none !important;}
+.pages-info{
+    color: #563d7c;
+}
+
+
+
 
 /* Chart JS style */
 

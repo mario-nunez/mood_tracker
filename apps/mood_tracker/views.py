@@ -1,7 +1,8 @@
+
 from django.db.models import Avg, Count
 from django.db.models.functions import Round
 from rest_framework import status
-from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,14 +10,11 @@ from rest_framework.views import APIView
 from .constants import MAX_REACTION_RATE
 from .models import Mood
 from .serializers import MoodSerializer, MoodsDaySerializer
-from ..common.decorators import authentication_required
-from ..common.models import Achievement, UserProfile
-
+from apps.common.decorators import authentication_required
+from apps.common.models import Achievement, UserProfile
 
 
 # Create your views here.
-
-
 
 class HomeList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -61,30 +59,27 @@ class HomeList(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-class MoodList(APIView):
+class MoodList(APIView, PageNumberPagination):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/moods.html'
-    pagination_class = PageNumberPagination
+    page_size = 4
 
     @authentication_required
     def get(self, request):
         user_profile = UserProfile.objects.get(user_id=request.user.id)
         user_moods = Mood.objects.filter(user_profile_id=user_profile.id)
 
-        paginator = PageNumberPagination()
-        result_page = paginator.paginate_queryset(user_moods, request)
+        result_page = self.paginate_queryset(user_moods, request)
         serializer = MoodSerializer(result_page, many=True)
-
-        print('RESULT PAGE', result_page)
-        print('SERIALIZER', serializer)
-        print('SERIALIZER DATA', serializer.data)
-        print('NEXT', paginator.get_next_link())
 
         data = {
             'moods': serializer.data,
-            'next_link': paginator.get_next_link(),
-            'previous_link': paginator.get_previous_link()
+            'page': request.query_params.get(self.page_query_param, 1),
+            'num_pages': self.page.paginator.num_pages,
+            'next_link': self.get_next_link(),
+            'previous_link': self.get_previous_link()
             }
+
         return Response(data, status=status.HTTP_200_OK)
 
     @authentication_required
@@ -92,9 +87,36 @@ class MoodList(APIView):
         pass
 
 
-class MoodCharts(APIView):
+class MoodDetail(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'mood_tracker/charts.html'
+    template_name = 'mood_tracker/mood_detail.html'
+
+    @authentication_required
+    def get(self, request, pk, format=None):
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+        user_mood = Mood.objects.get(user_profile_id=user_profile.id, id=pk)
+        serializer = MoodSerializer(user_mood)
+
+        data = {'mood': serializer.data}
+
+        return Response(data, status=status.HTTP_200_OK)
+
+    @authentication_required
+    def post(self, request, pk, format=None):
+        pass
+
+    @authentication_required
+    def put(self, request, pk, format=None):
+        pass
+
+    @authentication_required
+    def delete(self, request, pk, format=None):
+        pass
+
+
+class MoodStats(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'mood_tracker/stats.html'
 
     @authentication_required
     def get(self, request):
