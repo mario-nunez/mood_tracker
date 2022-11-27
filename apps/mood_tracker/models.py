@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 
 from .constants import MAX_REACTION_RATE, MORNING, AFTERNOON, EVENING, NIGHT
-from ..common.models import UserProfile
+from apps.core.models import UserProfile
 
 
 # Create your models here.

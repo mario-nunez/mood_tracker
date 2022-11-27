@@ -70,7 +70,7 @@ class LogOut(APIView):
 
 class About(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'common/about.html'
+    template_name = 'core/about.html'
 
     @admin_only
     @authentication_required
@@ -80,7 +80,7 @@ class About(APIView):
 
 class UserSettings(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'common/settings.html'
+    template_name = 'core/settings.html'
 
     @authentication_required
     def get(self, request):
@@ -96,7 +96,7 @@ class UserSettings(APIView):
 
 class UserAchievements(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'common/achievements.html'
+    template_name = 'core/achievements.html'
 
     @authentication_required
     def get(self, request):
@@ -110,7 +110,7 @@ class UserAchievements(APIView):
 
 class AdminDashboard(APIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'common/admin_dashboard.html'
+    template_name = 'core/admin_dashboard.html'
 
     @admin_only
     @authentication_required

@@ -5,9 +5,10 @@ from rest_framework.views import APIView
 
 from .models import Lesson
 from .serializers import LessonSerializer
-from ..common.decorators import authentication_required
+from apps.core.decorators import authentication_required
 
 # Create your views here.
+
 
 class LessonList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -23,6 +24,6 @@ class LessonList(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-    
+
     def post(self, request):
         pass

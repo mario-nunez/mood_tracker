@@ -4,4 +4,10 @@ from .models import Mood
 
 # Register your models here.
 
-admin.site.register(Mood)
+
+class MoodAdmin(admin.ModelAdmin):
+    list_display = ('user_profile', 'emotion', 'day_date', 'day_time',
+                    'reaction_rate')
+
+
+admin.site.register(Mood, MoodAdmin)

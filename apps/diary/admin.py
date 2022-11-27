@@ -4,4 +4,9 @@ from .models import Diary
 
 # Register your models here.
 
-admin.site.register(Diary)
+
+class DiaryAdmin(admin.ModelAdmin):
+    list_display = ('day_date', 'entry')
+
+
+admin.site.register(Diary, DiaryAdmin)

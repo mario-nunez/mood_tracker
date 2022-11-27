@@ -10,8 +10,8 @@ from rest_framework.views import APIView
 from .constants import MAX_REACTION_RATE
 from .models import Mood
 from .serializers import MoodSerializer, MoodsDaySerializer
-from apps.common.decorators import authentication_required
-from apps.common.models import Achievement, UserProfile
+from apps.core.decorators import authentication_required
+from apps.core.models import Achievement, UserProfile
 
 
 # Create your views here.

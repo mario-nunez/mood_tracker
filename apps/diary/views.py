@@ -5,9 +5,10 @@ from rest_framework.views import APIView
 
 from .models import Diary
 from .serializers import DiarySerializer
-from ..common.decorators import authentication_required
+from apps.core.decorators import authentication_required
 
 # Create your views here.
+
 
 class DiaryList(APIView):
     renderer_classes = [TemplateHTMLRenderer]
@@ -23,7 +24,7 @@ class DiaryList(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-    
+
     @authentication_required
     def post(self, request):
         pass

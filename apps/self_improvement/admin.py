@@ -4,4 +4,9 @@ from .models import Lesson
 
 # Register your models here.
 
-admin.site.register(Lesson)
+
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ('topic', 'category', 'title')
+
+
+admin.site.register(Lesson, LessonAdmin)

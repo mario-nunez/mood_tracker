@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Diary(models.Model):
     day_date = models.DateField()
     entry = models.TextField()
