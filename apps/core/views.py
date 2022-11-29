@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from rest_framework import status
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
@@ -116,3 +116,12 @@ class AdminDashboard(APIView):
     @authentication_required
     def get(self, request):
         return Response(status=status.HTTP_200_OK)
+
+
+# Redirecto to custom error pages
+def error_404(request):
+    return render(request, 'core/404.html')
+
+
+def error_500(request):
+    return render(request, 'core/500.html')

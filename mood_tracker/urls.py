@@ -7,6 +7,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 
+handler500 = 'apps.core.views.error_500'
+handler500 = 'apps.core.views.error_404'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.mood_tracker.urls')),
