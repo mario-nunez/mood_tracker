@@ -24,7 +24,7 @@ class HomeList(APIView):
     def get(self, request):
         # Filter by user information
         user_profile = UserProfile.objects.get(user_id=request.user.id)
-        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)\
+        user_moods = Mood.objects.filter(user_profile_id=request.user.id)\
                                  .order_by('-day_date')
 
         # Home table - Get user data grouped by days
@@ -111,7 +111,12 @@ class MoodDetail(APIView):
 
     @authentication_required
     def delete(self, request, pk, format=None):
-        pass
+        user_profile = UserProfile.objects.get(user_id=request.user.id)
+        user_mood = Mood.objects.get(user_profile_id=user_profile.id, id=pk)
+
+        user_mood.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class MoodStats(APIView):
