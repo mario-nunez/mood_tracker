@@ -47,7 +47,8 @@
 											<i class="fas fa-file-import"></i> Report
 										  </button>
                                           <div class="dropdown-divider"></div>
-                                          <button class="dropdown-item" type="button" data-toggle="modal" data-target="#deleteModal">
+                                          <button class="dropdown-item" type="button" data-toggle="modal"
+										  		  data-target="#deleteModal" data-moodid="666">
 											<i class="fas fa-trash-alt"></i> Delete
 										  </button>
                                         </div>
@@ -86,6 +87,8 @@
 						
 					</table>
 
+					<br>
+
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<li class="page-item">
@@ -96,7 +99,7 @@
 								{% endif %}
 							</li>
 							<li class="page-item">
-								<p class="page-link no-hover">Page <a href=""></a>{{page}} of {{num_pages}}</p>
+								<p class="page-link no-hover">Page {{page}} of {{num_pages}}</p>
 							</li>
 							<li class="page-item">
 								{% if next_link %}

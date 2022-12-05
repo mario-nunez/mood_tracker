@@ -16,9 +16,10 @@ from apps.core.models import Achievement, UserProfile
 
 # Create your views here.
 
-class HomeList(APIView):
+class HomeList(APIView, PageNumberPagination):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/home.html'
+    page_size = 2
 
     @authentication_required
     def get(self, request):
@@ -27,11 +28,12 @@ class HomeList(APIView):
         user_moods = Mood.objects.filter(user_profile_id=request.user.id)\
                                  .order_by('-day_date')
 
-        # Home table - Get user data grouped by days
+        # Home table - Get user data grouped by days and paginated
         moods_by_day = user_moods.values('day_date', 'day_week')\
                                  .annotate(total_moods=Count('emotion'),
                                            day_avg_rate=Avg('reaction_rate'))
-        serializer = MoodsDaySerializer(moods_by_day, many=True)
+        result_page = self.paginate_queryset(moods_by_day, request)
+        serializer = MoodsDaySerializer(result_page, many=True)
 
         # Avg rate card - Get total average reaction rate of a user
         total_avg_rate = user_moods.aggregate(
@@ -49,6 +51,10 @@ class HomeList(APIView):
 
         data = {
             'day_moods': serializer.data,
+            'page': request.query_params.get(self.page_query_param, 1),
+            'num_pages': self.page.paginator.num_pages,
+            'next_link': self.get_next_link(),
+            'previous_link': self.get_previous_link(),
             'days_registered': days_registered['total_days'],
             'user_avg_rate': total_avg_rate,
             'max_rate': MAX_REACTION_RATE,
@@ -62,7 +68,7 @@ class HomeList(APIView):
 class MoodList(APIView, PageNumberPagination):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/moods.html'
-    page_size = 4
+    page_size = 2
 
     @authentication_required
     def get(self, request):

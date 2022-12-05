@@ -5,7 +5,8 @@ from .models import Mood
 class MoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mood
-        fields = '__all__'
+        fields = ['id', 'emotion', 'day_date', 'day_week', 'day_time',
+                  'day_part', 'reason', 'reaction', 'reaction_rate']
 
 
 class MoodsDaySerializer(serializers.ModelSerializer):

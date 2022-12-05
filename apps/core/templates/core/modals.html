@@ -1,3 +1,4 @@
+{% load static %}
 <!-- MODALS -->
 
 <!-- Delete Modal -->
@@ -12,11 +13,12 @@
           </button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete this element?
+          <!-- Are you sure you want to delete this element? -->
+          <span id="first"></span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+          <button type="button" class="btn btn-danger" href="{% url 'home' %}"><i class="fas fa-trash-alt"></i> Delete</button>
         </div>
       </div>
     </div>
@@ -46,3 +48,15 @@ aria-labelledby="reportModal" aria-hidden="true">
  </div>
 </div>
 </div>
+
+
+
+<script>
+  
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  // do something...
+  console.log('hohohooho')
+  $("#first").html('hhihihihi');
+})
+</script>
+
