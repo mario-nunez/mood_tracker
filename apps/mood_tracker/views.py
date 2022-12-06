@@ -1,6 +1,7 @@
 
 from django.db.models import Avg, Count
 from django.db.models.functions import Round
+from django.shortcuts import redirect
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -8,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .constants import MAX_REACTION_RATE
+from .forms import MoodForm
 from .models import Mood
 from .serializers import MoodSerializer, MoodsDaySerializer
 from apps.core.decorators import authentication_required
@@ -68,12 +70,13 @@ class HomeList(APIView, PageNumberPagination):
 class MoodList(APIView, PageNumberPagination):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'mood_tracker/moods.html'
-    page_size = 2
+    page_size = 9
 
     @authentication_required
     def get(self, request):
         user_profile = UserProfile.objects.get(user_id=request.user.id)
-        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)
+        user_moods = Mood.objects.filter(user_profile_id=user_profile.id)\
+                                 .order_by('-day_date')
 
         result_page = self.paginate_queryset(user_moods, request)
         serializer = MoodSerializer(result_page, many=True)
@@ -108,10 +111,6 @@ class MoodDetail(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
     @authentication_required
-    def post(self, request, pk, format=None):
-        pass
-
-    @authentication_required
     def put(self, request, pk, format=None):
         pass
 
@@ -123,6 +122,35 @@ class MoodDetail(APIView):
         user_mood.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class MoodRegister(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'mood_tracker/mood_form.html'
+
+    @authentication_required
+    def get(self, request):
+        form = MoodForm()
+        context = {'form': form}
+        return Response(context, status=status.HTTP_200_OK)
+
+    @authentication_required
+    def post(self, request):
+        form = MoodForm(request.data)
+
+        if form.is_valid():
+            # Associate automatically the mood registered with the user
+            mood = form.save(commit=False)
+            mood.user_profile = UserProfile.objects.get(
+                user_id=request.user.id
+            )
+            mood.save()
+
+            return redirect('moods')
+
+        context = {'form': form}
+
+        return Response(context, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MoodStats(APIView):

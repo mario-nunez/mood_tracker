@@ -1,10 +1,9 @@
 {% extends 'core/main.html' %}
-
-{% block content %}
-
-{% include 'core/modals.html' %}
 {% load tag_methods %}
 {% load static %}
+
+{% block content %}
+{% include 'core/modals.html' %}
 
 <br>
 
@@ -13,7 +12,7 @@
 		<div class="col-md">
 			<h5>Your moods &nbsp;
 				<a class="btn btn-sm btn-info" style="width: fit-content;"
-				href=""> <i class="far fa-edit"></i> Register mood</a>
+				href="{% url 'register-mood' %}"> <i class="far fa-edit"></i> Register mood</a>
 			</h5>
 			<div class="card card-body" >
 

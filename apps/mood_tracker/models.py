@@ -10,8 +10,8 @@ from apps.core.models import UserProfile
 # Create your models here.
 
 class Mood(models.Model):
-    user_profile = models.ForeignKey(UserProfile, null=True,
-                                     on_delete=models.SET_NULL)
+    user_profile = models.ForeignKey(UserProfile,
+                                     on_delete=models.CASCADE)
     emotion = models.CharField(max_length=30)
     day_date = models.DateField()
     day_week = models.CharField(max_length=10, blank=True)
