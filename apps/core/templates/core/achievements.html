@@ -4,8 +4,19 @@
 
 {% block content %}
 
-<br>
+    <br>
 
-<p>Achievmements page</p>
+    <p>ACHIEVEMENTS:</p>
+
+    {% for achievement in achievements %}
+        {% if achievement.id in user_achievements %}
+            <p>Le tengo</p>
+            <p>{{achievement}}</p>
+        {% else %}
+            <p>NO LE TENGO</p>
+            <p>{{achievement}}</p>
+        {% endif %}
+
+    {% endfor %}
 
 {% endblock %}

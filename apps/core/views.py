@@ -9,7 +9,8 @@ from rest_framework.views import APIView
 from .decorators import (authentication_not_required, authentication_required,
                          admin_only)
 from .forms import CreateUserForm, UserProfileForm
-from .models import UserProfile
+from .models import UserProfile, Achievement
+from .serializers import AchievementSerializer
 
 
 class SignUp(APIView):
@@ -100,7 +101,22 @@ class UserAchievements(APIView):
 
     @authentication_required
     def get(self, request):
-        return Response(status=status.HTTP_200_OK)
+        user_achievements = UserProfile.objects\
+            .filter(user_id=request.user.id)\
+            .values_list('achievements', flat=True)
+        achievements = Achievement.objects.all()
+
+        print(user_achievements)
+        print(achievements)
+
+        serializer = AchievementSerializer(achievements, many=True)
+
+        data = {
+            'achievements': serializer.data,
+            'user_achievements': user_achievements
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
 
     @admin_only
     @authentication_required
